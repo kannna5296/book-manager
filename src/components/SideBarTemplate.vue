@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import LearnInput from "./LearnInput.vue";
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <v-app id="inspire">
@@ -15,7 +13,8 @@ import LearnInput from "./LearnInput.vue";
     </v-navigation-drawer>
 
     <v-main>
-      <LearnInput />
+      <!-- <LearnInput /> -->
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
