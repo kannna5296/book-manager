@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import axios from "axios";
+
+axios.get("/hello").then(function (response) {
+  console.log(response.data);
+});
+</script>
+
 <template>
   <v-row align-content="center" class="mt-10">
     <v-col>
