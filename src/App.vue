@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import SideBarTemplate from "./components/SideBarTemplate.vue";
 </script>
 
 <template>
-  <HelloWorld />
+  <SideBarTemplate />
 </template>
 
 <style scoped></style>
