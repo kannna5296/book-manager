@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:swagger": "openapi --input ./src/repositories/openapi.yaml --output ./src/repositories/generated --client axios --useUnionTypes --useOptions --indent 2 --postfixServices Repository"
   },
   "dependencies": {
     "axios": "^1.4.0",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "msw": "^1.2.3",
+    "openapi-typescript-codegen": "^0.25.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vue-tsc": "^1.8.5"

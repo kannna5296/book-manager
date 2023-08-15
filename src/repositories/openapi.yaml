@@ -1,0 +1,64 @@
+openapi: 3.0.1
+info:
+  title: 学び/気づき
+  description: API仕様書
+  version: v1
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: Learned
+  description: 得た学び/気づき
+paths:
+  /learned/:
+    get:
+      tags:
+      - Learned
+      summary: "学び/気づき参照 ※検索,件数指定は後ほど追加予定"
+      operationId: index
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LearnedIndexResponse'
+components:
+  schemas:
+    LearnedIndexResponse:
+      required:
+      - bookName
+      - date
+      - id
+      - learnedList
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: 01H75MAQSCQCBJ5MQJHYWZ5KHT
+        date:
+          type: string
+          description: 投稿日付
+          format: date
+          example: 2023-08-01
+        bookName:
+          type: string
+          description: 書籍名
+          example: 走ることについて語るときに僕の語ること
+        learnedList:
+          type: array
+          description: 学び/気づき一覧のレスポンス
+          items:
+            $ref: '#/components/schemas/LearnedResponse'
+      description: 学び/気づき一覧のレスポンス
+    LearnedResponse:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          type: string
+          description: 学び/気づきの内容
+          example: 小説書きとランニングは似ている
+      description: 学び/気づき一覧のレスポンス
