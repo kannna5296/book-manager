@@ -15,9 +15,14 @@ const vuetify = createVuetify({
   directives,
 });
 
-if (process.env.NODE_ENV === "development") {
+if (import.meta.env.MODE === "mock") {
   console.log("あああ");
-  worker.start();
+  worker.start({
+    serviceWorker: {
+      url: "/mockServiceWorker.js",
+    },
+    onUnhandledRequest: "bypass",
+  });
 }
 
 createApp(App).use(routes).use(vuetify).mount("#app");
