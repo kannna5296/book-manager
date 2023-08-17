@@ -1,23 +1,41 @@
 <script setup lang="ts">
-import { LearnedRepository } from "../repositories/generated";
-const responses =
+import {
+  LearnedIndexResponse,
+  LearnedRepository,
+} from "../repositories/generated";
+import { ref, Ref } from "vue";
+
+const responses: Ref<LearnedIndexResponse[]> = ref([]);
+
+const getLearns = async () => {
   //TODO TakeLatest
-  await LearnedRepository.index().then((res) => {
-    return res.learnedList;
-  });
-// .catch((error) => {
-//   console.log("しっぱい!" + error);
-//   return [];
-// });
+  //TODO catchとかは共通化したい
+  await LearnedRepository.index()
+    .then((res) => {
+      console.log("OK!");
+      responses.value.push(...res);
+      console.log(responses.value.length);
+    })
+    .catch((error) => {
+      console.log("Error!" + error);
+    });
+};
+
+getLearns();
 </script>
 
 <template>
-  <h2>今までの学び一覧</h2>
-  <li v-for="res in responses">
-    {{ res.content }}
-  </li>
-  <v-row align-content="center" class="mt-10 w-50 mx-auto"> 8/1 </v-row>
-  <v-row align-content="center" class="mt-10 w-50 mx-auto"> 8/2 </v-row>
-  <v-row align-content="center" class="mt-10 w-50 mx-auto"> 8/3 </v-row>
-  <v-row align-content="center" class="mt-10 w-50 mx-auto"> 8/4 </v-row>
+  <h2>学び一覧</h2>
+  <v-row
+    align-content="center"
+    class="mt-10 w-50 mx-auto"
+    v-for="res in responses"
+  >
+    {{ res.bookName }}
+    <ul>
+      <li v-for="leaned in res.learnedList">
+        {{ leaned }}
+      </li>
+    </ul>
+  </v-row>
 </template>
