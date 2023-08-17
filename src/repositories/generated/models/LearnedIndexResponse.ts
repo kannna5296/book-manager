@@ -3,8 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { LearnedResponse } from './LearnedResponse';
-
 /**
  * 学び/気づき一覧のレスポンス
  */
@@ -24,6 +22,6 @@ export type LearnedIndexResponse = {
   /**
    * 学び/気づき一覧のレスポンス
    */
-  learnedList: Array<LearnedResponse>;
+  learnedList: Array<string>;
 };
 

@@ -4,33 +4,33 @@ info:
   description: API仕様書
   version: v1
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+  - url: http://localhost:8080
+    description: Generated server url
 tags:
-- name: Learned
-  description: 得た学び/気づき
+  - name: Learned
+    description: 得た学び/気づき
 paths:
   /learned/:
     get:
       tags:
-      - Learned
+        - Learned
       summary: "学び/気づき参照 ※検索,件数指定は後ほど追加予定"
       operationId: index
       responses:
         "200":
           description: OK
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/LearnedIndexResponse'
+                $ref: "#/components/schemas/LearnedIndexResponse"
 components:
   schemas:
     LearnedIndexResponse:
       required:
-      - bookName
-      - date
-      - id
-      - learnedList
+        - bookName
+        - date
+        - id
+        - learnedList
       type: object
       properties:
         id:
@@ -50,15 +50,6 @@ components:
           type: array
           description: 学び/気づき一覧のレスポンス
           items:
-            $ref: '#/components/schemas/LearnedResponse'
-      description: 学び/気づき一覧のレスポンス
-    LearnedResponse:
-      required:
-      - content
-      type: object
-      properties:
-        content:
-          type: string
-          description: 学び/気づきの内容
-          example: 小説書きとランニングは似ている
+            type: string
+            description: 学び/気づき一覧のレスポンス
       description: 学び/気づき一覧のレスポンス
