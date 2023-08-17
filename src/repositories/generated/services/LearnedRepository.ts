@@ -15,7 +15,7 @@ export class LearnedRepository {
    * @returns LearnedIndexResponse OK
    * @throws ApiError
    */
-  public static index(): CancelablePromise<LearnedIndexResponse> {
+  public static index(): CancelablePromise<Array<LearnedIndexResponse>> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/learned/',

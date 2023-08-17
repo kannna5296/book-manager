@@ -22,7 +22,9 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/LearnedIndexResponse"
+                type: array
+                items:
+                  $ref: "#/components/schemas/LearnedIndexResponse"
 components:
   schemas:
     LearnedIndexResponse:
