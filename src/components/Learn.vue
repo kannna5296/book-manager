@@ -31,7 +31,7 @@ getLearns();
     class="mt-10 w-50 mx-auto"
     v-for="res in responses"
   >
-    <v-card width="700" class="pa-4" :title="res.date" variant="outlined">
+    <v-card width="700" class="pa-4" :subtitle="res.date" variant="outlined">
       {{ res.content }}
     </v-card>
   </v-row>
