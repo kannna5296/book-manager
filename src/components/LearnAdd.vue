@@ -7,6 +7,14 @@ const learnMaxValidation = (value: string) =>
 const learnRules = [learnRequiredValidation, learnMaxValidation];
 
 const valid = ref(false);
+const input = ref("");
+const inputting = ref("");
+
+const submit = () => {
+  input.value = inputting.value;
+  inputting.value = "";
+  //TODO 投稿できました！Chips出して画面遷移したい
+};
 </script>
 
 <template>
@@ -14,12 +22,16 @@ const valid = ref(false);
   <v-form ref="form" v-model="valid">
     <v-textarea
       class="mt-10 w-50 mx-auto"
-      label="Label"
+      placeholder="今日の学びを入力してください。"
       variant="outlined"
+      v-model="inputting"
       :rules="learnRules"
     ></v-textarea>
     <div class="mt-10 w-50 mx-auto">
-      <v-btn :disabled="!valid" color="indigo-darken-3">投稿</v-btn>
+      <v-btn :disabled="!valid" color="indigo-darken-3" @click="submit"
+        >投稿</v-btn
+      >
     </div>
   </v-form>
+  <div>仮:投稿内容 {{ input }}</div>
 </template>
