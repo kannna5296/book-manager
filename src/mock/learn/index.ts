@@ -46,6 +46,6 @@ const responseList: LearnedIndexResponse[] = [
 export const index = rest.get(
   createMockEndpoint("/learned"),
   (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(responseList));
+    return res(ctx.delay(500), ctx.status(200), ctx.json(responseList));
   }
 );
