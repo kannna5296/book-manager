@@ -1,12 +1,12 @@
 import Learn from "../components/Learn.vue";
-import LearnPost from "../components/LearnPost.vue";
+import LearnAdd from "../components/LearnAdd.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = createRouter({
   history: createWebHistory(),
   routes: [
     { name: "index", path: "/", component: Learn },
-    { name: "post", path: "/post", component: LearnPost },
+    { name: "add", path: "/add", component: LearnAdd },
   ],
 });
 
