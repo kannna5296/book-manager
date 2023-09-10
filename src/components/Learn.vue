@@ -25,7 +25,7 @@ getLearns();
 </script>
 
 <template>
-  <h2>学び一覧</h2>
+  <h2 class="mt-10 w-50 mx-auto">学び一覧</h2>
   <v-row
     align-content="center"
     class="mt-10 w-50 mx-auto"
