@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import {
+  LearnedRepository,
+  LearnedRegisterForm,
+} from "../repositories/generated";
+
 const learnRequiredValidation = (value: string) =>
   !!value || "今日の学びを入力してください。";
 const learnMaxValidation = (value: string) =>
@@ -10,9 +15,20 @@ const valid = ref(false);
 const input = ref("");
 const inputting = ref("");
 
-const submit = () => {
-  input.value = inputting.value;
-  inputting.value = "";
+const submit = async () => {
+  //TODO TakeLatest
+  //TODO catchとかは共通化したい
+  const params: LearnedRegisterForm = {
+    content: inputting.value,
+  };
+  await LearnedRepository.register({ requestBody: params })
+    .then((res) => {
+      console.log("OK!");
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log("Error!" + error);
+    });
   //TODO 投稿できました！Chips出して画面遷移したい
 };
 </script>
