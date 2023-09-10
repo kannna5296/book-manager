@@ -6,22 +6,17 @@ const responseList: LearnedIndexResponse[] = [
   {
     id: "01H75MAQSCQCBJ5MQJHYWZ5KHT",
     date: "2023-01-01",
-    bookName: "走ることについて語るときに僕の語ること",
-    learnedList: [
-      "小説書きとランニングは似ている",
-      "小説に限らず、物事を継続するには体調が大事",
-      "ランニングは何度やっても慣れない",
-    ],
+    content: "最悪売れなくてもいいから個人開発はなんかまず一個作れ",
   },
   {
     id: "01H75MAQSCQCBJ5MQJHYWZ5KHA",
-    date: "2023-02-01",
-    bookName: "マネジメントキャリアパス",
-    learnedList: [
-      "設計背景を説明することは有用",
-      "新規参画者に慣れてもらうには時間がかかる",
-      "XXXX",
-    ],
+    date: "2023-01-02",
+    content: "早めに失敗するが吉",
+  },
+  {
+    id: "01H75MAQSCQCBJ5MQJHYWZ5KHR",
+    date: "2023-01-02",
+    content: "小説書きとランニングは似ている",
   },
 ];
 

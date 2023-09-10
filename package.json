@@ -8,7 +8,7 @@
     "mock": "vite --mode mock",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "generate:swagger": "openapi --input ./src/repositories/openapi.yaml --output ./src/repositories/generated --client axios --useUnionTypes --useOptions --indent 2 --postfixServices Repository --exportCore false"
+    "generate:swagger": "openapi --input ./src/repositories/openapi.yaml --output ./src/repositories/generated --client axios --useUnionTypes --useOptions --indent 2 --postfixServices Repository"
   },
   "dependencies": {
     "axios": "^1.4.0",

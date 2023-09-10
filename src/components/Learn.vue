@@ -31,11 +31,6 @@ getLearns();
     class="mt-10 w-50 mx-auto"
     v-for="res in responses"
   >
-    {{ res.bookName }}
-    <ul>
-      <li v-for="leaned in res.learnedList">
-        {{ leaned }}
-      </li>
-    </ul>
+    {{ res.content }} {{ res.date }}
   </v-row>
 </template>

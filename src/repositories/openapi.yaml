@@ -29,10 +29,9 @@ components:
   schemas:
     LearnedIndexResponse:
       required:
-        - bookName
+        - content
         - date
         - id
-        - learnedList
       type: object
       properties:
         id:
@@ -44,14 +43,8 @@ components:
           description: 投稿日付
           format: date
           example: 2023-08-01
-        bookName:
+        content:
           type: string
-          description: 書籍名
-          example: 走ることについて語るときに僕の語ること
-        learnedList:
-          type: array
           description: 学び/気づき一覧のレスポンス
-          items:
-            type: string
-            description: 学び/気づき一覧のレスポンス
+          example: 小説書きとランニングは似ている
       description: 学び/気づき一覧のレスポンス

@@ -16,12 +16,8 @@ export type LearnedIndexResponse = {
    */
   date: string;
   /**
-   * 書籍名
-   */
-  bookName: string;
-  /**
    * 学び/気づき一覧のレスポンス
    */
-  learnedList: Array<string>;
+  content: string;
 };
 
