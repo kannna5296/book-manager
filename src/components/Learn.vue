@@ -12,9 +12,7 @@ const getLearns = async () => {
   //TODO catchとかは共通化したい
   await LearnedRepository.index()
     .then((res) => {
-      console.log("OK!");
       responses.value.push(...res);
-      console.log(responses.value.length);
     })
     .catch((error) => {
       console.log("Error!" + error);
