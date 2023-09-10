@@ -4,6 +4,7 @@ import {
   LearnedRepository,
   LearnedRegisterForm,
 } from "../repositories/generated";
+import { useRouter } from "vue-router";
 
 const learnRequiredValidation = (value: string) =>
   !!value || "今日の学びを入力してください。";
@@ -14,6 +15,7 @@ const learnRules = [learnRequiredValidation, learnMaxValidation];
 const valid = ref(false);
 const input = ref("");
 const inputting = ref("");
+const router = useRouter();
 
 const submit = async () => {
   //TODO TakeLatest
@@ -22,14 +24,14 @@ const submit = async () => {
     content: inputting.value,
   };
   await LearnedRepository.register({ requestBody: params })
-    .then((res) => {
+    .then(() => {
       console.log("OK!");
-      console.log(res);
+      router.replace("/");
+      //TODO notify
     })
     .catch((error) => {
       console.log("Error!" + error);
     });
-  //TODO 投稿できました！Chips出して画面遷移したい
 };
 </script>
 
