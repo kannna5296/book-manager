@@ -3,6 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { LearnedIndexResponse } from '../models/LearnedIndexResponse';
+import type { LearnedRegisterForm } from '../models/LearnedRegisterForm';
+import type { LearnedRegisterResponse } from '../models/LearnedRegisterResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -19,6 +21,24 @@ export class LearnedRepository {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/learned/',
+    });
+  }
+
+  /**
+   * 学び/気づき投稿
+   * @returns LearnedRegisterResponse OK
+   * @throws ApiError
+   */
+  public static register({
+    requestBody,
+  }: {
+    requestBody: LearnedRegisterForm,
+  }): CancelablePromise<LearnedRegisterResponse> {
+    return __request(OpenAPI, {
+      method: 'POST',
+      url: '/learned/',
+      body: requestBody,
+      mediaType: 'application/json',
     });
   }
 

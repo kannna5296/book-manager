@@ -8,5 +8,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { LearnedIndexResponse } from './models/LearnedIndexResponse';
+export type { LearnedRegisterForm } from './models/LearnedRegisterForm';
+export type { LearnedRegisterResponse } from './models/LearnedRegisterResponse';
 
 export { LearnedRepository } from './services/LearnedRepository';
