@@ -10,7 +10,7 @@ const response: LearnedRegisterResponse = {
 
 export const register = rest.post(
   createMockEndpoint("/learned"),
-  (req, res, ctx) => {
+  (_req, res, ctx) => {
     return res(ctx.delay(500), ctx.status(200), ctx.json(response));
   }
 );
