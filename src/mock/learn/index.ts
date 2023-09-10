@@ -5,8 +5,14 @@ import { LearnedIndexResponse } from "../../repositories/generated";
 const responseList: LearnedIndexResponse[] = [
   {
     id: "01H75MAQSCQCBJ5MQJHYWZ5KHT",
-    date: "2023-01-06",
+    date: "2023-01-07",
     content: "最悪売れなくてもいいから個人開発はなんかまず一個作れ",
+  },
+  {
+    id: "01H75MAQSCQCBJ5MQJHYWZ5KHT",
+    date: "2023-01-06",
+    content:
+      "人としてはネットから離れるべきなのは明らかなのに、ネットで仕事して何かを生み出すのに躍起になっている",
   },
   {
     id: "01H75MAQSCQCBJ5MQJHYWZ5KHR",
