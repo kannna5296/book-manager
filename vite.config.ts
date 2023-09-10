@@ -1,30 +1,9 @@
-import { defineConfig, ProxyOptions, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // Load env file based on `mode` in the current working directory.
-  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-  const env = loadEnv(mode, process.cwd(), "VITE_");
-
-  const { VITE_API_BASE_PATH } = env;
-
-  const proxy: Record<string, ProxyOptions | string> =
-    mode === "localhost"
-      ? {
-          [`^${VITE_API_BASE_PATH}`]: {
-            target: "http://localhost:8080",
-            changeOrigin: true,
-          },
-        }
-      : {};
-  // console.log(proxy);
-
   return {
     plugins: [vue()],
-    server: {
-      proxy: proxy,
-      host: true,
-    },
   };
 });
