@@ -51,5 +51,4 @@ const submit = async () => {
       >
     </div>
   </v-form>
-  <div>仮:投稿内容 {{ input }}</div>
 </template>
