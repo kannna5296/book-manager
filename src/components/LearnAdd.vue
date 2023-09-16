@@ -13,7 +13,6 @@ const learnMaxValidation = (value: string) =>
 const learnRules = [learnRequiredValidation, learnMaxValidation];
 
 const valid = ref(false);
-const input = ref("");
 const inputting = ref("");
 const router = useRouter();
 
@@ -51,5 +50,4 @@ const submit = async () => {
       >
     </div>
   </v-form>
-  <div>仮:投稿内容 {{ input }}</div>
 </template>
