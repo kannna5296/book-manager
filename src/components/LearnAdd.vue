@@ -13,7 +13,6 @@ const learnMaxValidation = (value: string) =>
 const learnRules = [learnRequiredValidation, learnMaxValidation];
 
 const valid = ref(false);
-const input = ref("");
 const inputting = ref("");
 const router = useRouter();
 
