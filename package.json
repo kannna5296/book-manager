@@ -6,6 +6,8 @@
   "scripts": {
     "local": "vite --mode localhost",
     "mock": "vite --mode mock",
+    "dev": "vite --mode development",
+    "build:dev": "vue-tsc && vite build --mode development",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "generate:swagger": "openapi --input ./src/repositories/openapi.yaml --output ./src/repositories/generated --client axios --useUnionTypes --useOptions --indent 2 --postfixServices Repository"
