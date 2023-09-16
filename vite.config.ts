@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
 
   const proxy: Record<string, ProxyOptions | string> = {
     //これほんまにいける？
-    [`^${VITE_API_BASE_PATH}`]: {
+    [`api/v1`]: {
       target: VITE_API_BASE_PATH,
       changeOrigin: true,
     },
