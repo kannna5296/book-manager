@@ -19,10 +19,10 @@ export type OpenAPIConfig = {
   ENCODE_PATH?: ((path: string) => string) | undefined;
 };
 
-const BASE = import.meta.env.VITE_API_BASE;
+const BASE_URL = import.meta.env.VITE_API_BASE;
 
 export const OpenAPI: OpenAPIConfig = {
-  BASE,
+  BASE: BASE_URL ? BASE_URL : "http://localhost:8080/api/v1",
   VERSION: "1",
   WITH_CREDENTIALS: false,
   CREDENTIALS: "include",
