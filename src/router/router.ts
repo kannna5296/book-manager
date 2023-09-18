@@ -38,15 +38,17 @@ export default routes;
 routes.beforeEach((to, _from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (requiresAuth) {
-    // TODO セッション管理方法
-    if (!auth.currentUser) {
-      next({
-        path: "/signin",
-        query: { redirect: to.fullPath },
-      });
-    } else {
-      next();
-    }
+    auth.onAuthStateChanged((user) => {
+      //onAuthStateChangedじゃないとuserがnullになる
+      if (!user) {
+        next({
+          path: "/signin",
+          query: { redirect: to.fullPath },
+        });
+      } else {
+        next();
+      }
+    });
   } else {
     next();
   }
