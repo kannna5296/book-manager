@@ -3,6 +3,7 @@ import LearnAdd from "../components/LearnAdd.vue";
 import Signin from "../components/Signin.vue";
 import Signup from "../components/Signup.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import { auth } from "../firebase/firebase";
 
 const routes = createRouter({
   history: createWebHistory(),
@@ -38,8 +39,7 @@ routes.beforeEach((to, _from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (requiresAuth) {
     // TODO セッション管理方法
-    const user = sessionStorage.getItem("user");
-    if (!user) {
+    if (!auth.currentUser) {
       next({
         path: "/signin",
         query: { redirect: to.fullPath },

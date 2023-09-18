@@ -1,11 +1,6 @@
 <script setup lang="ts">
 // import { ref } from "vue";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  auth,
-} from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import router from "../router/router.ts";
 import { initializeFirebaseApp } from "../firebase/firebase";
 
@@ -16,12 +11,10 @@ const auth = getAuth();
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result);
+    .then(() => {
       router.push("/");
     })
     .catch((error) => {
-      console.log("エラー！！");
       console.log(error);
     });
 };
