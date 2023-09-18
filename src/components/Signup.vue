@@ -30,9 +30,7 @@ const signInWithGoogle = () => {
   <v-form ref="form">
     <div class="mt-10 w-50 mx-auto">
       <!-- UIいじりたい-->
-      <v-btn class="signup-button" color="success" @click="signInWithGoogle"
-        >GOOGLでSIGNUP</v-btn
-      >
+      <v-btn color="success" @click="signInWithGoogle">GOOGLでSIGNUP</v-btn>
     </div>
   </v-form>
 </template>
