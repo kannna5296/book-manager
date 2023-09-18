@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-// import router from "@/router/index.ts";
-// import { User } from "@/components/User";
+//import router from "../router/router.ts";
 
 const email = ref("");
 const password = ref("");

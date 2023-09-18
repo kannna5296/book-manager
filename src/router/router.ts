@@ -34,7 +34,7 @@ const routes = createRouter({
 
 export default routes;
 
-routes.beforeEach((to, from, next) => {
+routes.beforeEach((to, _from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (requiresAuth) {
     // TODO セッション管理方法

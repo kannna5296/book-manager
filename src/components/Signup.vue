@@ -1,12 +1,44 @@
 <!-- 元ネタ https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/examples/v-form/misc-exposed.vue -->
 <script setup lang="ts">
 import { ref } from "vue";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+// import router from "../router/router.ts";
+import { initializeFirebaseApp } from "../firebase/firebase";
+
+initializeFirebaseApp();
+
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+// signInWithPopup(auth, provider)
+//   .then((result) => {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     // const credential = GoogleAuthProvider.credentialFromResult(result);
+//     // const token = credential.accessToken;
+//     // The signed-in user info.
+//     const user = result.user;
+//     sessionStorage.setItem("user", JSON.stringify(user)); //後でいじる
+//     // IdP data available using getAdditionalUserInfo(result)
+//     router.push("/login");
+//     // ...
+//   })
+//   .catch((error) => {
+//     // // Handle Errors here
+//     console.log("ミスったww");
+//     console.log(error);
+//     // const errorCode = error.code;
+//     // const errorMessage = error.message;
+//     // // The email of the user's account used.
+//     // const email = error.customData.email;
+//     // // The AuthCredential type that was used.
+//     // const credential = GoogleAuthProvider.credentialFromError(error);
+//     // ...
+//   });
 // import {
 //   getAuth,
 //   createUserWithEmailAndPassword,
 //   updateProfile,
 // } from "firebase/auth";
-// import router from "@/router/index.ts";
+
 // import MacOSIcon from "../svg/MacOSIcon.vue";
 
 const email = ref("");
@@ -33,24 +65,6 @@ const nameRequiredValidation = (value: string) =>
 const nameLengthLimitValidation = (value: string) =>
   (value && value.length <= 10) || "お名前は10文字以下で入力してください。";
 const nameRules = [nameRequiredValidation, nameLengthLimitValidation];
-
-// const submit = async () => {
-//   const auth = getAuth();
-//   await createUserWithEmailAndPassword(auth, email.value, password.value)
-//     .then((userCredential) => {
-//       updateProfile(userCredential.user, { displayName: name.value }); //displayNameを更新する
-
-//       // LocalStorage使う理由はよくわからない
-//       localStorage.message = "ユーザの新規作成に成功しました。";
-
-//       // TOPにリダイレクト処理
-//       router.push("/login");
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       errorMessage.value = "ユーザーの新規作成に失敗しました。";
-//     });
-// };
 </script>
 
 <template>
