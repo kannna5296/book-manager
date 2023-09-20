@@ -16,6 +16,7 @@ jobs:
         env:
           VITE_API_BASE_PATH: ${{ secrets.VITE_API_BASE_PATH }}
           VITE_FB_API_KEY: ${{ secrets.VITE_FB_API_KEY }}
+          VITE_FB_AUTH_DOMAIN: ${{ secrets.VITE_FB_AUTH_DOMAIN }}
           VITE_FB_DATABASE_URL: ${{ secrets.VITE_FB_DATABASE_URL }}
           VITE_FB_PROJECT_ID: ${{ secrets.VITE_FB_PROJECT_ID }}
           VITE_FB_STORAGE_BUCKET: ${{ secrets.VITE_FB_STORAGE_BUCKET }}
