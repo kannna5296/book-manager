@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import {
-  LearnedIndexResponse,
-  LearnedRepository,
-} from "../repositories/generated";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebase.ts";
 import { ref, Ref } from "vue";
+import { auth } from "../firebase/firebase.ts";
 
-const responses: Ref<LearnedIndexResponse[]> = ref([]);
+const learns: Ref<string[]> = ref([]);
+const userId = ref("");
 
+auth.onAuthStateChanged((user) => {
+  if (!user) {
+    console.log("user is null");
+    return;
+  }
+  userId.value = user.uid;
+});
 const getLearns = async () => {
-  //TODO TakeLatest
-  //TODO catchとかは共通化したい
-  await LearnedRepository.index()
-    .then((res) => {
-      responses.value.push(...res);
-    })
-    .catch((error) => {
-      console.log("Error!" + error);
-    });
+  const learnsSnapShot = await getDocs(
+    query(
+      collection(db, "learned"),
+      where("userId", "==", userId.value),
+      orderBy("createdAt", "asc")
+    )
+  );
+  learnsSnapShot.forEach((doc) => {
+    learns.value.push(doc.data().content);
+  });
 };
 
 getLearns();
@@ -32,10 +40,10 @@ getLearns();
   <v-row
     align-content="center"
     class="mt-10 w-50 mx-auto"
-    v-for="res in responses"
+    v-for="learn in learns"
   >
-    <v-card width="700" class="pa-4" :subtitle="res.date" variant="outlined">
-      {{ res.content }}
+    <v-card width="700" class="pa-4" variant="outlined">
+      {{ learn }}
     </v-card>
   </v-row>
 </template>

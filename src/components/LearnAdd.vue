@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import {
-  LearnedRepository,
-  LearnedRegisterForm,
-} from "../repositories/generated";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from "../firebase/firebase.ts";
+import { auth } from "../firebase/firebase.ts";
 import { useRouter } from "vue-router";
 
 const learnRequiredValidation = (value: string) =>
@@ -17,20 +16,43 @@ const inputting = ref("");
 const router = useRouter();
 
 const submit = async () => {
+  console.log("submitting...");
+
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      console.log("user is null");
+      return;
+    }
+    addDoc(collection(db, "learned"), {
+      content: inputting.value,
+      userId: user?.uid,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+    })
+      .then((result) => {
+        console.log("submit success!");
+        console.log(result);
+        router.push("/");
+      })
+      .catch((error) => {
+        console.log("submit failed!!");
+        console.log(error);
+      });
+  });
   //TODO TakeLatest
   //TODO catchとかは共通化したい
-  const params: LearnedRegisterForm = {
-    content: inputting.value,
-  };
-  await LearnedRepository.register({ requestBody: params })
-    .then(() => {
-      console.log("OK!");
-      router.replace("/");
-      //TODO notify
-    })
-    .catch((error) => {
-      console.log("Error!" + error);
-    });
+  // const params: LearnedRegisterForm = {
+  //   content: inputting.value,
+  // };
+  // await LearnedRepository.register({ requestBody: params })
+  //   .then(() => {
+  //     console.log("OK!");
+  //     router.replace("/");
+  //     //TODO notify
+  //   })
+  //   .catch((error) => {
+  //     console.log("Error!" + error);
+  //   });
 };
 </script>
 
