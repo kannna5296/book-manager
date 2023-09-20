@@ -1,32 +1,52 @@
 <script setup lang="ts">
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import dayjs from "dayjs";
+import {
+  Timestamp,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase.ts";
-import { ref, Ref } from "vue";
+import { ref } from "vue";
 import { auth } from "../firebase/firebase.ts";
 
-const learns: Ref<string[]> = ref([]);
-const userId = ref("");
-
-auth.onAuthStateChanged((user) => {
-  if (!user) {
-    console.log("user is null");
-    return;
+class Learn {
+  content: string;
+  createdAt: Timestamp;
+  constructor(content: string, createdAt: Timestamp) {
+    this.content = content;
+    this.createdAt = createdAt;
   }
-  userId.value = user.uid;
-});
+}
+
+const userId = ref("");
+const learns = ref<Learn[]>(new Array<Learn>());
+
 const getLearns = async () => {
-  const learnsSnapShot = await getDocs(
-    query(
-      collection(db, "learned"),
-      where("userId", "==", userId.value),
-      orderBy("createdAt", "asc")
-    )
-  );
-  learnsSnapShot.forEach((doc) => {
-    learns.value.push(doc.data().content);
+  // async/awaitの入れ子、多分変
+  auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+      console.log("user is null");
+      return;
+    }
+    userId.value = user.uid;
+
+    const learnsSnapShot = await getDocs(
+      query(
+        collection(db, "learned"),
+        where("userId", "==", userId.value),
+        orderBy("createdAt", "asc")
+      )
+    );
+
+    learnsSnapShot.forEach((doc) => {
+      const user = new Learn(doc.data().content, doc.data().createdAt);
+      learns.value.push(user);
+    });
   });
 };
-
 getLearns();
 </script>
 
@@ -42,8 +62,13 @@ getLearns();
     class="mt-10 w-50 mx-auto"
     v-for="learn in learns"
   >
-    <v-card width="700" class="pa-4" variant="outlined">
-      {{ learn }}
+    <v-card
+      width="700"
+      class="pa-4"
+      :subtitle="dayjs(learn.createdAt.toDate()).format('YYYY-MM-DD')"
+      variant="outlined"
+    >
+      {{ learn.content }}
     </v-card>
   </v-row>
 </template>
