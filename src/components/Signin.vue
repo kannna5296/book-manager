@@ -25,11 +25,8 @@ const signInWithGoogle = () => {
     本日もお疲れ様でした。今日の学びを記録しましょう。
   </h3>
   <v-row class="mt-10 w-50 mx-auto" justify="center">
-    <v-btn color="blue-darken-1" outlined @click="signInWithGoogle">
-      <div class="pb-1">
-        <v-icon>{{ mdiGoogle }}</v-icon>
-      </div>
-      <div class="ml-1">Googleでログイン</div></v-btn
-    >
+    <button @click="signInWithGoogle">
+      <img width="200" src="/btn_google_signin_dark_normal_web@2x.png" />
+    </button>
   </v-row>
 </template>
