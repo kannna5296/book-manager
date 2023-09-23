@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import router from "../router/router.ts";
 import { initializeFirebaseApp } from "../firebase/firebase";
@@ -17,26 +16,14 @@ const signInWithGoogle = () => {
       console.log(error);
     });
 };
-
-const message = ref("");
-const errorMessage = ref("");
 </script>
 
 <template>
-  <h2 class="mt-10 w-50 mx-auto">サインイン</h2>
-  <div class="mt-10 w-50 mx-auto">
-    <v-btn variant="text" color="pink-darken-4" to="signup">
-      >新規登録はこちら</v-btn
-    >
-  </div>
-  <v-form ref="form">
-    <div class="mt-10 w-50 mx-auto">
-      <!-- UIいじりたい-->
-      <v-btn color="success" @click="signInWithGoogle">GOOGLでSIGNIN</v-btn>
-    </div>
-  </v-form>
-  <v-alert v-if="message" dense outlined type="success">{{ message }}</v-alert>
-  <v-alert v-if="errorMessage" dense outlined type="error">{{
-    errorMessage
-  }}</v-alert>
+  <h2 class="mt-10 w-50 mx-auto text-center">日々是好日</h2>
+  <h3 class="mt-10 w-50 mx-auto text-center">
+    本日もお疲れ様でした。今日の学びを記録しましょう。
+  </h3>
+  <v-row class="mt-10 w-50 mx-auto" justify="center">
+    <v-btn color="success" @click="signInWithGoogle">GOOGLEでSIGNIN</v-btn>
+  </v-row>
 </template>
