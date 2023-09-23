@@ -85,7 +85,7 @@ const submit = async () => {
   <v-form ref="form" v-model="valid">
     <v-textarea
       class="mt-10 w-50 mx-auto"
-      placeholder="今日の学びを入力してください。"
+      placeholder="今日の学びを入力してください。(140文字以内)"
       variant="outlined"
       v-model="inputting"
       :rules="learnRules"
