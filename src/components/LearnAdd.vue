@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  Timestamp,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase.ts";
 import { auth } from "../firebase/firebase.ts";
 import { useRouter } from "vue-router";
+
+const today: Date = new Date();
+today.setHours(0, 0, 0, 0);
+const startDate: Timestamp = Timestamp.fromDate(today);
+today.setDate(today.getDate() + 1); //新規変数作りたいけどJavaScript的にはどうするのがイイんや
+const endDate: Timestamp = Timestamp.fromDate(today);
 
 const learnRequiredValidation = (value: string) =>
   !!value || "今日の学びを入力してください。";
@@ -12,47 +25,53 @@ const learnMaxValidation = (value: string) =>
 const learnRules = [learnRequiredValidation, learnMaxValidation];
 
 const valid = ref(false);
+const duplicatedOnDay = ref(false);
+const errorMessage = ref("");
 const inputting = ref("");
 const router = useRouter();
+const userId = ref("");
+
+auth.onAuthStateChanged((user) => {
+  if (!user) {
+    console.log("user is null");
+    return;
+  }
+  userId.value = user.uid;
+});
+
+const getLearns = async () => {
+  auth.onAuthStateChanged(async () => {
+    const learnsSnapShot = await getDocs(
+      query(
+        collection(db, "learned"),
+        where("userId", "==", userId.value),
+        where("createdAt", ">=", startDate),
+        where("createdAt", "<", endDate)
+      )
+    );
+    if (learnsSnapShot.size > 0) {
+      duplicatedOnDay.value = true;
+      errorMessage.value = "今日はすでに学びを投稿しているので投稿できません。";
+    }
+  });
+};
+getLearns();
 
 const submit = async () => {
   console.log("submitting...");
 
-  auth.onAuthStateChanged((user) => {
-    if (!user) {
-      console.log("user is null");
-      return;
-    }
-    addDoc(collection(db, "learned"), {
-      content: inputting.value,
-      userId: user?.uid,
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now(),
+  addDoc(collection(db, "learned"), {
+    content: inputting.value,
+    userId: userId.value,
+    createdAt: Timestamp.now(),
+    updatedAt: Timestamp.now(),
+  })
+    .then(() => {
+      router.push("/");
     })
-      .then((result) => {
-        console.log("submit success!");
-        console.log(result);
-        router.push("/");
-      })
-      .catch((error) => {
-        console.log("submit failed!!");
-        console.log(error);
-      });
-  });
-  //TODO TakeLatest
-  //TODO catchとかは共通化したい
-  // const params: LearnedRegisterForm = {
-  //   content: inputting.value,
-  // };
-  // await LearnedRepository.register({ requestBody: params })
-  //   .then(() => {
-  //     console.log("OK!");
-  //     router.replace("/");
-  //     //TODO notify
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error!" + error);
-  //   });
+    .catch((error) => {
+      console.log(error);
+    });
 };
 </script>
 
@@ -66,8 +85,18 @@ const submit = async () => {
       v-model="inputting"
       :rules="learnRules"
     ></v-textarea>
+    <v-alert
+      class="mt-10 w-50 mx-auto"
+      v-if="errorMessage"
+      variant="outlined"
+      type="error"
+      >{{ errorMessage }}</v-alert
+    >
     <div class="mt-10 w-50 mx-auto">
-      <v-btn :disabled="!valid" color="indigo-darken-3" @click="submit"
+      <v-btn
+        :disabled="!valid || duplicatedOnDay"
+        color="indigo-darken-3"
+        @click="submit"
         >投稿</v-btn
       >
     </div>
