@@ -77,6 +77,11 @@ const submit = async () => {
 
 <template>
   <h2 class="mt-10 w-50 mx-auto">今日の学び,気づきは？</h2>
+  <div class="mt-10 w-50 mx-auto">
+    <router-link to="/">
+      <v-btn color="indigo-darken-3">学び一覧に戻る</v-btn>
+    </router-link>
+  </div>
   <v-form ref="form" v-model="valid">
     <v-textarea
       class="mt-10 w-50 mx-auto"
