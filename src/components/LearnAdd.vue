@@ -86,14 +86,12 @@ const submit = async () => {
       :rules="learnRules"
     ></v-textarea>
     <v-alert
-      icon="mdi-firework"
       class="mt-10 w-50 mx-auto"
       v-if="errorMessage"
       variant="outlined"
       type="error"
       >{{ errorMessage }}</v-alert
     >
-    <v-icon icon="$vuetify"></v-icon>
     <div class="mt-10 w-50 mx-auto">
       <v-btn
         :disabled="!valid || duplicatedOnDay"
