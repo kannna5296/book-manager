@@ -4,20 +4,20 @@ import { auth } from "../firebase/firebase";
 import router from "../router/router.ts";
 
 const userName = ref<string>("");
-const loginMessage = ref<string>("");
+const userPhotoUrl = ref<string>("");
 const login = ref<boolean>(false);
 
 auth.onAuthStateChanged((user) => {
   if (user != null) {
+    console.log(user.photoURL);
     userName.value = user.displayName || "";
-    loginMessage.value = "logged in";
+    userPhotoUrl.value = user.photoURL || "";
     login.value = true;
   }
 });
 
 const logout = () => {
   userName.value = "";
-  loginMessage.value = "";
   login.value = false;
   auth.signOut();
   router.push("/signin");
@@ -36,9 +36,13 @@ const logout = () => {
       <template v-slot:prepend>
         <v-list-item
           lines="two"
+          :prepend-avatar="userPhotoUrl"
           :title="userName"
-          :subtitle="loginMessage"
+          subtitle="logged in"
         ></v-list-item>
+        <v-list-item
+          >今日は{{ new Date().toLocaleDateString() }}です！</v-list-item
+        >
       </template>
       <v-divider></v-divider>
       <v-btn class="ma-4" @click="logout">ログアウト</v-btn>

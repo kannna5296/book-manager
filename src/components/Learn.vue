@@ -51,7 +51,7 @@ getLearns();
 </script>
 
 <template>
-  <h2 class="mt-10 w-50 mx-auto">学び一覧</h2>
+  <h2 class="mt-10 w-50 mx-auto">今日までの学び一覧</h2>
   <div class="mt-10 w-50 mx-auto">
     <router-link to="/add">
       <v-btn color="indigo-darken-3">学びを追加</v-btn>
