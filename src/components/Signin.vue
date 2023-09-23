@@ -2,6 +2,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import router from "../router/router.ts";
 import { initializeFirebaseApp } from "../firebase/firebase";
+import { mdiGoogle } from "@mdi/js";
 
 initializeFirebaseApp();
 
@@ -24,6 +25,11 @@ const signInWithGoogle = () => {
     本日もお疲れ様でした。今日の学びを記録しましょう。
   </h3>
   <v-row class="mt-10 w-50 mx-auto" justify="center">
-    <v-btn color="success" @click="signInWithGoogle">GOOGLEでSIGNIN</v-btn>
+    <v-btn color="blue-darken-1" outlined @click="signInWithGoogle">
+      <div class="pb-1">
+        <v-icon>{{ mdiGoogle }}</v-icon>
+      </div>
+      <div class="ml-1">Googleでログイン</div></v-btn
+    >
   </v-row>
 </template>
