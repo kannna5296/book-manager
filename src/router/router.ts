@@ -1,7 +1,6 @@
 import Learn from "../components/Learn.vue";
 import LearnAdd from "../components/LearnAdd.vue";
 import Signin from "../components/Signin.vue";
-import Signup from "../components/Signup.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { auth } from "../firebase/firebase";
 
@@ -24,11 +23,6 @@ const routes = createRouter({
       name: "signin",
       path: "/signin",
       component: Signin,
-    },
-    {
-      name: "signup",
-      path: "/signup",
-      component: Signup,
     },
   ],
 });
