@@ -2,7 +2,6 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import router from "../router/router.ts";
 import { initializeFirebaseApp } from "../firebase/firebase";
-import { mdiGoogle } from "@mdi/js";
 
 initializeFirebaseApp();
 
