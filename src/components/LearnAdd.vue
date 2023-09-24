@@ -19,7 +19,7 @@ today.setDate(today.getDate() + 1); //新規変数作りたいけどJavaScript�
 const endDate: Timestamp = Timestamp.fromDate(today);
 
 const learnRequiredValidation = (value: string) =>
-  !!value || "今日の学びを入力してください。";
+  !!value || "今日の気づきを入力してください。";
 const learnMaxValidation = (value: string) =>
   value.length <= 140 || "140文字以内で入力してください。";
 const learnRules = [learnRequiredValidation, learnMaxValidation];
@@ -51,7 +51,8 @@ const getLearns = async () => {
     );
     if (learnsSnapShot.size > 0) {
       duplicatedOnDay.value = true;
-      errorMessage.value = "今日はすでに学びを投稿しているので投稿できません。";
+      errorMessage.value =
+        "今日はすでに気づきを投稿しているので投稿できません。";
     }
   });
 };
@@ -76,16 +77,16 @@ const submit = async () => {
 </script>
 
 <template>
-  <h2 class="mt-10 w-50 mx-auto">今日の学び,気づきは？</h2>
+  <h2 class="mt-10 w-50 mx-auto">今日の気づきは？</h2>
   <div class="mt-10 w-50 mx-auto">
     <router-link to="/">
-      <v-btn color="indigo-darken-3">学び一覧に戻る</v-btn>
+      <v-btn color="indigo-darken-3">一覧に戻る</v-btn>
     </router-link>
   </div>
   <v-form ref="form" v-model="valid">
     <v-textarea
       class="mt-10 w-50 mx-auto"
-      placeholder="今日の学びを入力してください。(140文字以内)"
+      placeholder="今日の気づきや学びを入力してください。(140文字以内)"
       variant="outlined"
       v-model="inputting"
       :rules="learnRules"

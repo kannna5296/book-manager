@@ -26,7 +26,6 @@ const logout = () => {
 
 <template>
   <v-app id="inspire">
-    <!--TODO 一旦無視-->
     <v-navigation-drawer
       v-if="login"
       model-value
