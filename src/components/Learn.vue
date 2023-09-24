@@ -37,7 +37,7 @@ const getLearns = async () => {
       query(
         collection(db, "learned"),
         where("userId", "==", userId.value),
-        orderBy("createdAt", "asc")
+        orderBy("createdAt", "desc")
       )
     );
 
