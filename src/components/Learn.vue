@@ -54,7 +54,7 @@ getLearns();
   <h2 class="mt-10 w-50 mx-auto">今日までの気づき一覧</h2>
   <div class="mt-10 w-50 mx-auto">
     <router-link to="/add">
-      <v-btn color="indigo-darken-3">気づきを追加</v-btn>
+      <v-btn color="grey-darken-4">気づきを追加</v-btn>
     </router-link>
   </div>
   <v-row

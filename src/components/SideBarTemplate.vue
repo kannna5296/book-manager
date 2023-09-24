@@ -30,7 +30,7 @@ const logout = () => {
       v-if="login"
       model-value
       class="pt-4"
-      color="indigo-darken-1"
+      color="grey-darken-3"
     >
       <template v-slot:prepend>
         <v-list-item
