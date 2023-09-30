@@ -36,7 +36,7 @@ const signInWithGoogle = () => {
 
 <style lang="scss" scoped>
 .home-hero__content {
-  background: url("/milad-fakurian--yLM0mOYRV8-unsplash.jpg");
+  background: url("/milad-fakurian--yLM0mOYRV8-unsplash.webp");
   background-size: cover;
   background-position: center center;
   height: 100%;
