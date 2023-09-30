@@ -6,6 +6,7 @@ import {
   getDocs,
   orderBy,
   query,
+  limit,
   where,
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase.ts";
@@ -23,6 +24,12 @@ class Learn {
 
 const userId = ref("");
 const learns = ref<Learn[]>(new Array<Learn>());
+const pageLimit = ref(3);
+
+function getMore() {
+  pageLimit.value += 3;
+  getLearns();
+}
 
 const getLearns = async () => {
   // async/awaitの入れ子、多分変
@@ -37,10 +44,12 @@ const getLearns = async () => {
       query(
         collection(db, "learned"),
         where("userId", "==", userId.value),
-        orderBy("createdAt", "desc")
+        orderBy("createdAt", "desc"),
+        limit(pageLimit.value)
       )
     );
 
+    learns.value = [];
     learnsSnapShot.forEach((doc) => {
       const user = new Learn(doc.data().content, doc.data().createdAt);
       learns.value.push(user);
@@ -71,4 +80,7 @@ getLearns();
       {{ learn.content }}
     </v-card>
   </v-row>
+  <div class="mt-10 w-50 mx-auto">
+    <v-btn color="grey-darken-4" @click="getMore()">もっと表示する</v-btn>
+  </div>
 </template>
