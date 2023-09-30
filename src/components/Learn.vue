@@ -8,9 +8,9 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase.ts";
+import { db } from "@/firebase/firebase.ts";
 import { ref } from "vue";
-import { auth } from "../firebase/firebase.ts";
+import { auth } from "@/firebase/firebase.ts";
 
 class Learn {
   content: string;

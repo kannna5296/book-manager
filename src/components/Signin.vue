@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import router from "../router/router.ts";
-import { initializeFirebaseApp } from "../firebase/firebase";
+import router from "@/router/router.ts";
+import { initializeFirebaseApp } from "@/firebase/firebase";
 
 initializeFirebaseApp();
 

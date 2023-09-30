@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { auth } from "../firebase/firebase";
-import router from "../router/router.ts";
+import { auth } from "@/firebase/firebase";
+import router from "@/router/router.ts";
 
 const userName = ref<string>("");
 const userPhotoUrl = ref<string>("");

@@ -1,6 +1,6 @@
 import { defineConfig, ProxyOptions, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
+import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
   return {
     resolve: {
       alias: {
-        "@": resolve(__dirname, "./src"),
+        "@/": `${__dirname}/src/`,
       },
     },
     plugins: [vue()],
