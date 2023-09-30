@@ -8,8 +8,8 @@ import {
   Timestamp,
   where,
 } from "firebase/firestore";
-import { db } from "../firebase/firebase.ts";
-import { auth } from "../firebase/firebase.ts";
+import { db } from "@/firebase/firebase.ts";
+import { auth } from "@/firebase/firebase.ts";
 import { useRouter } from "vue-router";
 
 const today: Date = new Date();
