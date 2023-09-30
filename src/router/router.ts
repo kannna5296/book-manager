@@ -1,9 +1,9 @@
-import Learn from "../components/Learn.vue";
-import LearnAdd from "../components/LearnAdd.vue";
-import Signin from "../components/Signin.vue";
-import NotFound from "../components/NotFound.vue";
+import Learn from "@/components/Learn.vue";
+import LearnAdd from "@/components/LearnAdd.vue";
+import Signin from "@/components/Signin.vue";
+import NotFound from "@/components/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import { auth } from "../firebase/firebase";
+import { auth } from "@/firebase/firebase";
 
 const routes = createRouter({
   history: createWebHistory(),
