@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import SideBarTemplate from "./components/SideBarTemplate.vue";
-</script>
-
 <template>
-  <SideBarTemplate />
+  <v-app>
+    <router-view />
+  </v-app>
 </template>
 
 <style scoped></style>
