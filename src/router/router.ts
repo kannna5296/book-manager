@@ -8,7 +8,7 @@ const unauthRoutes: Array<RouteRecordRaw> = [
     children: [
       {
         name: "",
-        path: "/",
+        path: "/book",
         component: BookSearch,
       },
     ],
