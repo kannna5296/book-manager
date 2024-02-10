@@ -5,6 +5,9 @@
 
 import type { BookDetailRentalResponse } from './BookDetailRentalResponse';
 
+/**
+ * 書籍詳細レスポンス
+ */
 export type BookDetailResponse = {
   id?: string;
   name?: string;

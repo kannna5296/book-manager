@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * 書籍登録フォーム
+ */
 export type BookRegisterForm = {
   name?: string;
   author?: string;

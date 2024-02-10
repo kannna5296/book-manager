@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * レンタル情報
+ */
 export type BookDetailRentalResponse = {
   userId?: string;
   rentedAt?: string;

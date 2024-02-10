@@ -3,6 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
+/**
+ * 書籍検索レスポンス
+ */
 export type BookSearchResponse = {
   id?: string;
   name?: string;

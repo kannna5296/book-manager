@@ -20,6 +20,9 @@ export class RentalUserRepository {
     userId,
     requestBody,
   }: {
+    /**
+     * 書籍ID
+     */
     userId: string,
     requestBody: RentalUserUpdateForm,
   }): CancelablePromise<any> {

@@ -15,7 +15,7 @@ export class RentalRepository {
    * @returns any 成功
    * @throws ApiError
    */
-  public static register1({
+  public static register({
     requestBody,
   }: {
     requestBody: RentalRegisterForm,

@@ -4,8 +4,6 @@
 /* eslint-disable */
 import type { BookDetailResponse } from '../models/BookDetailResponse';
 import type { BookRegisterForm } from '../models/BookRegisterForm';
-import type { BookSearchForm } from '../models/BookSearchForm';
-import type { Pageable } from '../models/Pageable';
 import type { PageBookSearchResponse } from '../models/PageBookSearchResponse';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -20,18 +18,48 @@ export class BookRepository {
    * @throws ApiError
    */
   public static search({
-    form,
-    pageable,
+    id,
+    name,
+    author,
+    page,
+    size = 20,
+    sort,
   }: {
-    form: BookSearchForm,
-    pageable: Pageable,
+    /**
+     * 書籍ID
+     */
+    id?: string,
+    /**
+     * 書籍名
+     */
+    name?: string,
+    /**
+     * 著者名
+     */
+    author?: string,
+    /**
+     * Zero-based page index (0..N)
+     */
+    page?: number,
+    /**
+     * The size of the page to be returned
+     */
+    size?: number,
+    /**
+     * Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
+     */
+    sort?: Array<string>,
   }): CancelablePromise<PageBookSearchResponse> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/book',
       query: {
-        'form': form,
-        'pageable': pageable,
+        'id': id,
+        'name': name,
+        'author': author,
+        'page': page,
+        'size': size,
+        'sort': sort,
       },
     });
   }
@@ -41,7 +69,7 @@ export class BookRepository {
    * @returns any 成功
    * @throws ApiError
    */
-  public static register2({
+  public static register({
     requestBody,
   }: {
     requestBody: BookRegisterForm,
@@ -62,6 +90,9 @@ export class BookRepository {
   public static detail({
     bookId,
   }: {
+    /**
+     * 書籍ID
+     */
     bookId: string,
   }): CancelablePromise<BookDetailResponse> {
     return __request(OpenAPI, {

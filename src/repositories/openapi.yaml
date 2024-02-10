@@ -23,9 +23,11 @@ paths:
       parameters:
       - name: userId
         in: path
+        description: 書籍ID
         required: true
         schema:
           type: string
+        example: 1
       requestBody:
         content:
           application/json:
@@ -55,7 +57,7 @@ paths:
       tags:
       - Rental
       summary: レンタル情報登録API
-      operationId: register_1
+      operationId: register
       requestBody:
         content:
           application/json:
@@ -72,16 +74,52 @@ paths:
       summary: 書籍情報検索API
       operationId: search
       parameters:
-      - name: form
+      - name: id
         in: query
-        required: true
+        description: 書籍ID
+        required: false
         schema:
-          $ref: '#/components/schemas/BookSearchForm'
-      - name: pageable
+          type: string
+        example: 1
+      - name: name
         in: query
-        required: true
+        description: 書籍名
+        required: false
         schema:
-          $ref: '#/components/schemas/Pageable'
+          type: string
+        example: ONE PIECE
+      - name: author
+        in: query
+        description: 著者名
+        required: false
+        schema:
+          type: string
+        example: 尾田 栄一郎
+      - name: page
+        in: query
+        description: Zero-based page index (0..N)
+        required: false
+        schema:
+          minimum: 0
+          type: integer
+          default: 0
+      - name: size
+        in: query
+        description: The size of the page to be returned
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+          default: 20
+      - name: sort
+        in: query
+        description: "Sorting criteria in the format: property,(asc|desc). Default\
+          \ sort order is ascending. Multiple sort criteria are supported."
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
       responses:
         "200":
           description: 成功
@@ -93,7 +131,7 @@ paths:
       tags:
       - Book
       summary: 書籍情報登録API
-      operationId: register_2
+      operationId: register
       requestBody:
         content:
           application/json:
@@ -112,9 +150,11 @@ paths:
       parameters:
       - name: bookId
         in: path
+        description: 書籍ID
         required: true
         schema:
           type: string
+        example: 1
       responses:
         "200":
           description: 成功
@@ -159,30 +199,7 @@ components:
           type: string
         author:
           type: string
-    BookSearchForm:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        author:
-          type: string
-    Pageable:
-      type: object
-      properties:
-        page:
-          minimum: 0
-          type: integer
-          format: int32
-        size:
-          minimum: 1
-          type: integer
-          format: int32
-        sort:
-          type: array
-          items:
-            type: string
+      description: 書籍登録フォーム
     BookSearchResponse:
       type: object
       properties:
@@ -192,6 +209,7 @@ components:
           type: string
         author:
           type: string
+      description: 書籍検索レスポンス
     PageBookSearchResponse:
       type: object
       properties:
@@ -232,16 +250,16 @@ components:
           format: int64
         sort:
           $ref: '#/components/schemas/SortObject'
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
     SortObject:
       type: object
       properties:
@@ -259,6 +277,7 @@ components:
         rentedAt:
           type: string
           format: date-time
+      description: レンタル情報
     BookDetailResponse:
       type: object
       properties:
@@ -272,3 +291,4 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BookDetailRentalResponse'
+      description: 書籍詳細レスポンス
