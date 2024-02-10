@@ -4,12 +4,10 @@
 /* eslint-disable */
 
 /**
- * 学び/気づき投稿フォーム
+ * 書籍登録フォーム
  */
-export type LearnedRegisterForm = {
-  /**
-   * 学び/気づきの内容
-   */
-  content: string;
+export type BookRegisterForm = {
+  name?: string;
+  author?: string;
 };
 

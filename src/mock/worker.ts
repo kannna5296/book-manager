@@ -1,5 +1,5 @@
 import { setupWorker } from "msw";
-import { index } from "./learn/index";
-import { register } from "./learn/register";
+import { index } from "./book/index";
+import { register } from "./book/detail";
 
 export const worker = setupWorker(index, register);
