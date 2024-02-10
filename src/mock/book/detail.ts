@@ -17,7 +17,7 @@ const response: BookDetailResponse = {
 };
 
 export const register = rest.post(
-  createMockEndpoint("/learned"),
+  createMockEndpoint("/book"),
   (_req, res, ctx) => {
     return res(ctx.delay(500), ctx.status(200), ctx.json(response));
   }

@@ -1,4 +1,4 @@
-import Learn from "@/components/Learn.vue";
+import BookSearch from "@/components/BookSearch.vue";
 import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 const unauthRoutes: Array<RouteRecordRaw> = [
@@ -9,7 +9,7 @@ const unauthRoutes: Array<RouteRecordRaw> = [
       {
         name: "",
         path: "/",
-        component: Learn,
+        component: BookSearch,
       },
     ],
   },

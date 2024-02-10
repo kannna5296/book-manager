@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { BookRepository } from '@/repositories/generated';
+import { BookRepository, PageBookSearchResponse } from '@/repositories/generated';
+import {ref} from 'vue'
+
+const searchResult = ref<PageBookSearchResponse>()
 
 const createSearchParams = () => ({
+  // TODO URLから取得する
   id: "a",
   name: "aa",
   author: "hoge",
@@ -10,11 +14,18 @@ const createSearchParams = () => ({
 })
 const getBooks = () => {
   const searchParams = createSearchParams();
-  return BookRepository.search(searchParams)
+  BookRepository.search(searchParams).then((result) => {
+    // useTakeLatest的なWrap関数作る
+    searchResult.value = result
+  }
+  )
 }
-getBooks()
+getBooks();
 </script>
 
 <template>
   <h1 class="mt-10 w-50 mx-auto">書籍一覧</h1>
+  <div v-for="(result) in searchResult?.content">
+      {{result.id}}:{{result.name}}:{{result.author}}
+    </div>
 </template>

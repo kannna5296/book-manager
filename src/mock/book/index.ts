@@ -21,8 +21,22 @@ const responseList: BookSearchResponse[] = [
 ];
 
 export const index = rest.get(
-  createMockEndpoint("/learned"),
+  createMockEndpoint("/book"),
   (_req, res, ctx) => {
-    return res(ctx.delay(500), ctx.status(200), ctx.json(responseList));
+    return res(
+      ctx.delay(500), 
+      ctx.status(200), 
+      ctx.json({
+        content: responseList,
+        pageable: {
+          sort: {
+            empty: false,
+            sorted: false,
+          },
+          offset: 0,
+          pageNumber: 1,
+        },
+        size: 10
+      }));
   }
 );
