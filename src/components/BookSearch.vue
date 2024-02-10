@@ -18,6 +18,7 @@ const searchResult = ref<PageBookSearchResponse>()
 const id = ref<string>();
 const name = ref<string>();
 const author = ref<string>();
+const loading = ref(false);
 
 const updateDataFromUrlQuery = (query: LocationQuery): void => {
   id.value = queryToString(query.id)
@@ -35,12 +36,17 @@ const createSearchParams = () => ({
 
 const getBooks = () => {
   const searchParams = createSearchParams();
+  loading.value = true;
   BookRepository.search(searchParams)
     .then((result) => {
       // useTakeLatest的なWrap関数あ作る
       searchResult.value = result
     }
+    ).finally(() => {
+      loading.value = false;
+    }
     )
+
 }
 
 const updateUrlQueryFromData = (): void => {
@@ -63,7 +69,7 @@ onBeforeRouteUpdate(async (to, _, next) => {
   updateDataFromUrlQuery(to.query);
   next();
   // ③v-modelの値でAPI叩く
-  getBooks();
+  await getBooks();
 });
 
 
@@ -104,7 +110,8 @@ getBooks();
           </th>
         </tr>
       </thead>
-      <tbody>
+      <v-progress-circular v-if="loading" :indeterminate="true" color="terminated" />
+      <tbody v-else>
         <tr v-for="(item) in searchResult?.content" :key="item.name">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
