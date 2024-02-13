@@ -30,7 +30,7 @@ const createSearchParams = () => ({
   id: id.value,
   name: name.value,
   author: author.value,
-  page: 1,
+  page: 0,
   size: 10
 })
 
