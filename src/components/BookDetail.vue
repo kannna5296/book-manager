@@ -10,8 +10,6 @@ const bookId = route.params.id.toString()
 
 const fetchResult = ref<BookDetailResponse>();
 
-const isReturned = fetchResult.value.
-
 const getBook = async () => {
   await BookRepository.detail({ bookId })
     .then((result) => {
@@ -27,6 +25,7 @@ getBook();
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍詳細</h1>
     <h3 class="mt-10">基本情報</h3>
+    <v-btn v-if="fetchResult?.canRental">レンタルする</v-btn>
     <v-table v-if="fetchResult" theme="light">
       <tbody>
         <tr>
@@ -67,7 +66,7 @@ getBook();
           <td>{{ item.userId }}</td>
           <td>{{ item.rentedAt }}</td>
           <td>{{ item.deadline }}</td>
-          <td></td>
+          <td>{{ item.returned }}</td>
         </tr>
       </tbody>
     </v-table>
