@@ -13,6 +13,7 @@
     "generate:swagger": "openapi --input ./src/repositories/openapi.yaml --output ./src/repositories/generated --client axios --useUnionTypes --useOptions --indent 2 --postfixServices Repository"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.9.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.10",
     "vue": "^3.3.4",

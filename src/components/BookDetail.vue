@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { notify } from "@kyvg/vue3-notification";
 import { BookRepository, BookDetailResponse, RentalRepository, RentalRegisterForm } from '@/repositories/generated';
 import { ref, computed } from 'vue'
-import {
-  useRoute,
-} from "vue-router";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
 const bookId = route.params.id.toString()
@@ -16,11 +15,10 @@ const displayRentalStatus = (returned: Boolean | undefined) => {
 }
 
 const canRental = computed(() => fetchResult.value?.canRental);
+const rentalSuccessMessage = ref("");
 
 const today = new Date();
 const deadlineIfTodayRental = ref(new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000));
-console.log()
-console.log(deadlineIfTodayRental)
 
 const execRental = async () => {
   const form: RentalRegisterForm = {
@@ -28,8 +26,22 @@ const execRental = async () => {
     // TODO ユーザが入力できるようにする
     userId: 1,
     deadline: deadlineIfTodayRental.value.toISOString()
-  }
+  };
   await RentalRepository.register({ requestBody: form })
+    .then(() => {
+      // TODO リロード後に通知が走る仕組みにしたい
+      notify({
+        title: "レンタルに成功しました",
+        type: "info"
+      });
+    }
+    )
+    .catch(() => {
+      notify({
+        title: "レンタルに失敗しました",
+        type: "error"
+      });
+    });
 }
 
 const getBook = async () => {
@@ -47,8 +59,10 @@ getBook();
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍詳細</h1>
     <h3 class="mt-10">基本情報</h3>
+    <notifications />
     <v-dialog max-width="75%">
       <template v-slot:activator="{ props }">
+        <div class="bg-info">{{ rentalSuccessMessage }}</div>
         <v-btn v-if="canRental" v-bind="props">レンタルする</v-btn>
         <div v-else class="text-red">レンタル中のため、レンタルできません。</div>
       </template>
