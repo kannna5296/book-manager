@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { toDateString } from '@/util/util'
+import { toDateStringFromString, toDateStringFromDate } from '@/util/util'
 import { notify } from "@kyvg/vue3-notification";
 import { BookRepository, BookDetailResponse, RentalRepository, RentalRegisterForm } from '@/repositories/generated';
 import { ref, computed } from 'vue'
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
+const router = useRouter();
 const route = useRoute();
 const bookId = route.params.id.toString()
 
@@ -54,11 +55,16 @@ const getBook = async () => {
     )
 }
 getBook();
+
+const back = () => {
+  router.back();
+}
 </script>
 
 <template>
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍詳細</h1>
+    <v-btn class="mt-10" @click="back">戻る</v-btn>
     <h3 class="mt-10">基本情報</h3>
     <notifications />
     <v-dialog max-width="75%">
@@ -71,7 +77,7 @@ getBook();
       <template v-slot:default="{ isActive }">
         <v-card title="レンタルしますか？">
           <v-card-text>
-            返却期限は{{ toDateString(deadlineIfTodayRental) }}です。
+            返却期限は{{ toDateStringFromDate(deadlineIfTodayRental) }}です。
           </v-card-text>
 
           <v-card-actions>
@@ -120,8 +126,8 @@ getBook();
       <tbody>
         <tr v-for="(item) in fetchResult?.rentals">
           <td>{{ item.userId }}</td>
-          <td>{{ toDateString(item.rentedAt) }}</td>
-          <td>{{ toDateString(item.deadline) }}</td>
+          <td>{{ toDateStringFromString(item.rentedAt) }}</td>
+          <td>{{ toDateStringFromString(item.deadline) }}</td>
           <td>{{ displayRentalStatus(item.returned) }}</td>
         </tr>
       </tbody>
