@@ -1,5 +1,5 @@
-import BookSearch from "@/components/BookSearch.vue";
-import BookDetail from "@/components/BookDetail.vue";
+import BookSearch from "@/components/page/BookSearch.vue";
+import BookDetail from "@/components/page/BookDetail.vue";
 import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 const unauthRoutes: Array<RouteRecordRaw> = [
