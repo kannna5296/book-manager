@@ -98,6 +98,7 @@ getBooks();
     <v-btn @click="onSearch">検索</v-btn>
     <v-table theme="light">
       <thead>
+
         <tr>
           <th class="text-left">
             ID
@@ -113,7 +114,11 @@ getBooks();
       <v-progress-circular v-if="loading" :indeterminate="true" color="terminated" />
       <tbody v-else>
         <tr v-for="(item) in searchResult?.content" :key="item.name">
-          <td>{{ item.id }}</td>
+          <td>
+            <router-link :to="`${$route.path}/${item.id}`" style="text-decoration: none;">
+              {{ item.id }}
+            </router-link>
+          </td>
           <td>{{ item.name }}</td>
           <td>{{ item.author }}</td>
         </tr>
