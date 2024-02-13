@@ -12,6 +12,7 @@ export type BookDetailResponse = {
   id?: string;
   name?: string;
   author?: string;
+  canRental?: boolean;
   rentals?: Array<BookDetailRentalResponse>;
 };
 
