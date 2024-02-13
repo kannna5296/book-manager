@@ -18,3 +18,8 @@ export const queryToNumber = (
     }
     return undefined;
 };
+
+export const toDateString = (date: string | undefined): string => {
+    if (date == undefined) return ""
+    return date.split('T')[0];
+}

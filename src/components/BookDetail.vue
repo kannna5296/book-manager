@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toDateString } from '@/util/util'
 import { notify } from "@kyvg/vue3-notification";
 import { BookRepository, BookDetailResponse, RentalRepository, RentalRegisterForm } from '@/repositories/generated';
 import { ref, computed } from 'vue'
@@ -23,7 +24,7 @@ const deadlineIfTodayRental = ref(new Date(today.getTime() + 7 * 24 * 60 * 60 * 
 const execRental = async () => {
   const form: RentalRegisterForm = {
     bookId: Number(bookId),
-    // TODO ユーザが入力できるようにする
+    // TODO 管理画面のユーザが、どのエンドユーザが借りるのか入力できるようにする
     userId: 1,
     deadline: deadlineIfTodayRental.value.toISOString()
   };
@@ -70,7 +71,7 @@ getBook();
       <template v-slot:default="{ isActive }">
         <v-card title="レンタルしますか？">
           <v-card-text>
-            返却期限は{{ deadlineIfTodayRental.toISOString().split('T')[0] }}です。
+            返却期限は{{ toDateString(deadlineIfTodayRental) }}です。
           </v-card-text>
 
           <v-card-actions>
@@ -119,8 +120,8 @@ getBook();
       <tbody>
         <tr v-for="(item) in fetchResult?.rentals">
           <td>{{ item.userId }}</td>
-          <td>{{ item.rentedAt }}</td>
-          <td>{{ item.deadline }}</td>
+          <td>{{ toDateString(item.rentedAt) }}</td>
+          <td>{{ toDateString(item.deadline) }}</td>
           <td>{{ displayRentalStatus(item.returned) }}</td>
         </tr>
       </tbody>
