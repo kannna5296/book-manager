@@ -46,7 +46,6 @@ const getBooks = () => {
       loading.value = false;
     }
     )
-
 }
 
 const updateUrlQueryFromData = (): void => {
@@ -98,7 +97,6 @@ getBooks();
     <v-btn @click="onSearch">検索</v-btn>
     <v-table theme="light">
       <thead>
-
         <tr>
           <th class="text-left">
             ID
