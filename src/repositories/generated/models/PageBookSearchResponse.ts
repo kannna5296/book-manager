@@ -14,8 +14,8 @@ export type PageBookSearchResponse = {
   content?: Array<BookSearchResponse>;
   number?: number;
   sort?: SortObject;
-  numberOfElements?: number;
   pageable?: PageableObject;
+  numberOfElements?: number;
   first?: boolean;
   last?: boolean;
   empty?: boolean;

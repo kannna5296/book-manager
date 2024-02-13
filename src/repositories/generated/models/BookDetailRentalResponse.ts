@@ -9,5 +9,7 @@
 export type BookDetailRentalResponse = {
   userId?: string;
   rentedAt?: string;
+  deadline?: string;
+  returned?: boolean;
 };
 

@@ -231,11 +231,11 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
         numberOfElements:
           type: integer
           format: int32
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
         first:
           type: boolean
         last:
@@ -250,24 +250,24 @@ components:
           format: int64
         sort:
           $ref: '#/components/schemas/SortObject'
-        paged:
-          type: boolean
-        unpaged:
-          type: boolean
         pageNumber:
           type: integer
           format: int32
         pageSize:
           type: integer
           format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
     SortObject:
       type: object
       properties:
         empty:
           type: boolean
-        sorted:
-          type: boolean
         unsorted:
+          type: boolean
+        sorted:
           type: boolean
     BookDetailRentalResponse:
       type: object
@@ -277,6 +277,11 @@ components:
         rentedAt:
           type: string
           format: date-time
+        deadline:
+          type: string
+          format: date-time
+        returned:
+          type: boolean
       description: レンタル情報
     BookDetailResponse:
       type: object
