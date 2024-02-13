@@ -10,6 +10,11 @@ const bookId = route.params.id.toString()
 
 const fetchResult = ref<BookDetailResponse>();
 
+const displayRentalStatus = (returned: Boolean | undefined) => {
+  if (returned == undefined) return "未"
+  return returned ? "済" : "未"
+}
+
 const getBook = async () => {
   await BookRepository.detail({ bookId })
     .then((result) => {
@@ -66,7 +71,7 @@ getBook();
           <td>{{ item.userId }}</td>
           <td>{{ item.rentedAt }}</td>
           <td>{{ item.deadline }}</td>
-          <td>{{ item.returned }}</td>
+          <td>{{ displayRentalStatus(item.returned) }}</td>
         </tr>
       </tbody>
     </v-table>
