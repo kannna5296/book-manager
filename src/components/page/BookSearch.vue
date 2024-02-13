@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { BookRepository, PageBookSearchResponse } from '@/repositories/generated';
+import { SearchTextField } from '@/components/atoms';
 import { ref } from 'vue'
 import { queryToString } from '@/util/util'
 import {
@@ -89,10 +90,7 @@ getBooks();
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍一覧</h1>
     <!-- Component化 -->
-    <div class="mb-1 align-center">
-      ID
-      <v-text-field density="compact" variant="outlined" placeholder="1" v-model="filterCondition.id"></v-text-field>
-    </div>
+    <search-text-field header-text="ID" placeholder-text="1" :model-value=filterCondition.id></search-text-field>
     <div class="mb-1 align-center">
       書籍名
       <v-text-field density="compact" variant="outlined" placeholder="人を動かす"
