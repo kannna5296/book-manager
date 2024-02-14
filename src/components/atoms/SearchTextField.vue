@@ -8,15 +8,11 @@ const props = defineProps<{
     modelValue?: any;
 }>()
 
-// TODO 検索画効いてないので
 const emit = defineEmits(["update:modelValue"])
 
 const model = computed({
     get: () => props.modelValue,
-    set: (value?: unknown) => {
-        console.log("update:modelValue " + value);
-        emit("update:modelValue", value);
-    }
+    set: (value?: unknown) => emit("update:modelValue", value)
 })
 
 </script>
