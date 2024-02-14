@@ -128,7 +128,9 @@ const back = () => {
           <td>{{ item.userId }}</td>
           <td>{{ toDateStringFromString(item.rentedAt) }}</td>
           <td>{{ toDateStringFromString(item.deadline) }}</td>
-          <td>{{ displayRentalStatus(item.returned) }}</td>
+          <td>{{ displayRentalStatus(item.returned) }}
+            <v-btn v-if="!item.returned">返却</v-btn>
+          </td>
         </tr>
       </tbody>
     </v-table>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BookRepository, PageBookSearchResponse } from '@/repositories/generated';
-import { SearchTextField } from '@/components/atoms';
+import { SearchTextField, CustomButton } from '@/components/atoms';
 import { ref } from 'vue'
 import { queryToString } from '@/util/util'
 import {
@@ -80,6 +80,11 @@ onBeforeRouteUpdate(async (_to, _, next) => {
   await getBooks();
 });
 
+const onClear = () => {
+  filterCondition.value.id = undefined
+  filterCondition.value.author = undefined
+  filterCondition.value.name = undefined
+}
 
 // ロードした時にも検索条件入っていて欲しい
 updateDataFromUrlQuery();
@@ -92,7 +97,10 @@ getBooks();
     <SearchTextField header-text="ID" placeholder-text="1" v-model="filterCondition.id" />
     <SearchTextField header-text="書籍名" placeholder-text="人を動かす" v-model="filterCondition.name" />
     <SearchTextField header-text="著者名" placeholder-text="D・カーネギー" v-model="filterCondition.author" />
-    <v-btn @click="onSearch">検索</v-btn>
+    <div class="d-flex justify-center">
+      <CustomButton @click="onSearch" buttonText="検索"></CustomButton>
+      <CustomButton color="white" @click="onClear" buttonText="クリア"></CustomButton>
+    </div>
     <v-table theme="light">
       <thead>
         <tr>
