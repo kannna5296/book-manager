@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toDateStringFromString, toDateStringFromDate } from '@/util/util'
+import { CustomButton } from '@/components/atoms';
 import { notify } from "@kyvg/vue3-notification";
 import { BookRepository, BookDetailResponse, RentalRepository, RentalRegisterForm } from '@/repositories/generated';
 import { ref, computed } from 'vue'
@@ -64,13 +65,14 @@ const back = () => {
 <template>
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍詳細</h1>
-    <v-btn class="mt-10" @click="back">戻る</v-btn>
+    <CustomButton @click="back" buttonText="戻る"></CustomButton>
     <h3 class="mt-10">基本情報</h3>
     <notifications />
     <v-dialog max-width="75%">
       <template v-slot:activator="{ props }">
         <div class="bg-info">{{ rentalSuccessMessage }}</div>
-        <v-btn v-if="canRental" v-bind="props">レンタルする</v-btn>
+        <!-- なんか変なのでpropsの渡し方見直し -->
+        <CustomButton v-if="canRental" v-bind="props" buttonText="レンタルする"></CustomButton>
         <div v-else class="text-red">レンタル中のため、レンタルできません。</div>
       </template>
 
@@ -82,8 +84,8 @@ const back = () => {
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn text="レンタルする" @click="execRental"></v-btn>
-            <v-btn text="戻る" @click="isActive.value = false"></v-btn>
+            <CustomButton @click="execRental" buttonText="レンタルする"></CustomButton>
+            <CustomButton @click="isActive.value = false" buttonText="戻る"></CustomButton>
           </v-card-actions>
         </v-card>
       </template>
@@ -128,8 +130,11 @@ const back = () => {
           <td>{{ item.userId }}</td>
           <td>{{ toDateStringFromString(item.rentedAt) }}</td>
           <td>{{ toDateStringFromString(item.deadline) }}</td>
-          <td>{{ displayRentalStatus(item.returned) }}
-            <v-btn v-if="!item.returned">返却</v-btn>
+          <td>
+            <div class="d-flex align-center justify-space-around">
+              <div>{{ displayRentalStatus(item.returned) }}</div>
+              <CustomButton v-if="!item.returned" buttonText="返却"></CustomButton>
+            </div>
           </td>
         </tr>
       </tbody>
