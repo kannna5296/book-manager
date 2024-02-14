@@ -89,19 +89,9 @@ getBooks();
 <template>
   <div class="mt-10 w-75 mx-auto">
     <h1>書籍一覧</h1>
-    <!-- Component化 -->
-    <search-text-field header-text="ID" placeholder-text="1" :model-value=filterCondition.id></search-text-field>
-    <div class="mb-1 align-center">
-      書籍名
-      <v-text-field density="compact" variant="outlined" placeholder="人を動かす"
-        v-model="filterCondition.name"></v-text-field>
-    </div>
-    <div class="mb-1 align-center">
-      著者名
-      <v-text-field density="compact" variant="outlined" placeholder="D・カーネギー"
-        v-model="filterCondition.author"></v-text-field>
-    </div>
-
+    <SearchTextField header-text="ID" placeholder-text="1" v-model="filterCondition.id" />
+    <SearchTextField header-text="書籍名" placeholder-text="人を動かす" v-model="filterCondition.name" />
+    <SearchTextField header-text="著者名" placeholder-text="D・カーネギー" v-model="filterCondition.author" />
     <v-btn @click="onSearch">検索</v-btn>
     <v-table theme="light">
       <thead>

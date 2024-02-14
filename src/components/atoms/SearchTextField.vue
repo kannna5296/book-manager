@@ -9,13 +9,14 @@ const props = defineProps<{
 }>()
 
 // TODO 検索画効いてないので
-const emit = defineEmits({
-    "update:modelValue": (_value?: any) => true,
-})
+const emit = defineEmits(["update:modelValue"])
 
 const model = computed({
     get: () => props.modelValue,
-    set: (value?: any) => emit("update:modelValue", value),
+    set: (value?: unknown) => {
+        console.log("update:modelValue " + value);
+        emit("update:modelValue", value);
+    }
 })
 
 </script>
